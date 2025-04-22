@@ -23,10 +23,10 @@ function [V_next, Q_p, Q_DNO] = sim_agua(Q_d, V_current, V_aquifero_k, Ts)
 
     % === 2) Bombear si el estanque queda bajo cierto umbral y hay acuífero ===
     % (esto representa reabastecimiento automático)
-    if V_next < 0.1 * V_max && V_aquifero_k > 0
+    if V_next < V_max && V_aquifero_k > 0
         % Agua máxima que puede extraer la bomba considerando disponibilidad
         available_rate = V_aquifero_k / Ts;           % [L/s] disponible
-        Q_p = min(Q_pump_max, available_rate);        % limita al acuífero
+        Q_p = 45 * min(Q_pump_max, available_rate);        % limita al acuífero
 
         % Llenar el estanque con lo bombeado
         V_next = V_next + Q_p * Ts;

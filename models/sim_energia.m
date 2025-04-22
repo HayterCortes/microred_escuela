@@ -1,10 +1,10 @@
-function [SoC_next, P_grid] = sim_energia(P_d, P_g, SoC, Ts, Q_p)
+function [SoC_next, P_grid, P_pump] = sim_energia(P_d, P_g, SoC, Ts, Q_p)
     global E_batt_max P_batt_max SoC_min SoC_max P_grid_max alpha_C alpha_D
 
     % Altura equivalente (pozo + estanque)
     h_equiv = 13.6508;      % [m]
     B = 9800;               % rho*g [kg·m/s²]
-    P_pump = (B * Q_p * h_equiv) / 1000;  % [kW]
+    P_pump = (45 * B * Q_p * h_equiv) / 1000;  % [kW]
 
     % Demanda total
     P_total = P_d + P_pump;
